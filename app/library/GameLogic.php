@@ -4,9 +4,24 @@ namespace App;
 
 class GameLogic
 {
-    public function __construct(
-        private array $matrix,
-    ) {
+    private array $matrix;
+
+    public function __construct(array $matrix)
+    {
+        if (empty($matrix)) {
+            throw new \LogicException('Matrix could not be empty.');
+        }
+
+        foreach ($matrix as $row) {
+            if (!is_array($row)) {
+                throw new \LogicException('Multidimensional matrix is expected.');
+            }
+            if (count($matrix) !== count($row)) {
+                throw new \LogicException('Square matrix is expected.');
+            }
+        }
+
+        $this->matrix = $matrix;
     }
 
     /**
@@ -35,7 +50,7 @@ class GameLogic
 
     public function isGameOver(): bool
     {
-        return !$this->isFreeCellsLeft() || $this->isLastMoveWin();
+        return !$this->isFreeCellsLeft() || $this->doWeHaveWinner();
     }
 
     public function isFreeCellsLeft(): bool
@@ -56,7 +71,7 @@ class GameLogic
      *
      * @return bool
      */
-    public function isLastMoveWin(): bool
+    public function doWeHaveWinner(): bool
     {
         // Check rows
         for ($i = 0; $i < count($this->matrix); $i++) {

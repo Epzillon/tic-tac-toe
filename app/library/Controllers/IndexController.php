@@ -44,7 +44,7 @@ class IndexController implements ControllerInterface
         $gameLogic = new GameLogic($matrix);
 
         $is_game_over = $gameLogic->isGameOver();
-        $is_player_win = $gameLogic->isLastMoveWin();
+        $is_player_win = $gameLogic->doWeHaveWinner();
         $is_computer_win = false;
         $row = 0;
         $col = 0;
@@ -52,7 +52,7 @@ class IndexController implements ControllerInterface
             list($row, $col) = $gameLogic->findBestMove($matrix);
             $gameLogic->setMove($row, $col);
             $is_game_over = $gameLogic->isGameOver();
-            $is_computer_win = $gameLogic->isLastMoveWin();
+            $is_computer_win = $gameLogic->doWeHaveWinner();
         }
 
         $view = new JsonView();

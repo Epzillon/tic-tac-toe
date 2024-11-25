@@ -44,10 +44,6 @@ Right now we don't have such feature only a table in a database.
 The computer's move logic should be rewritten to something less resource intensive.
 Recursive random is not working so good.
 
-### Task #4 (Optional)
-
-GameLogic file looks important. We want to cover it with tests.
-
 ## Installation
 
 ```bash
