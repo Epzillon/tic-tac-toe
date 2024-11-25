@@ -43,7 +43,7 @@ class GameLogic
         return $this->findBestMove($matrix);
     }
 
-    public function setMove(int $row, int $col): void
+    public function setComputersMove(int $row, int $col): void
     {
         $this->matrix[$row][$col] = 'O';
     }
