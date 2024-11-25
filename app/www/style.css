@@ -1,0 +1,26 @@
+body {
+    padding-top: 50px;
+}
+
+.content-container {
+    margin-top: 20px;
+}
+
+.toolbar {
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #e7e7e7;
+    width: 100%;
+}
+.toolbar input {
+    width: 100px;
+}
+
+#game_grid button{
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    margin: 0;
+    text-align: center;
+    line-height: 0;
+}

@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  db:
+    image: 'mariadb:10.6.3'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tic_tac_toe
+      MYSQL_USER: tic_tac_toe
+      MYSQL_PASSWORD: tic_tac_toe
+    ports:
+      - 13306:3306
+    volumes:
+      - ./dockers/db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./dockers/db/db_volume:/var/lib/mysql
+    networks:
+      app_network: ~
+    container_name: tic_tac_toe_test_db
+
+  app:
+    build: dockers/php/.
+    volumes:
+      - ./app:/var/www/app
+    depends_on:
+      - db
+    networks:
+      app_network: ~
+    container_name: tic_tac_toe_app
+
+  nginx:
+    image: 'nginx:1.17'
+    volumes:
+      - ./dockers/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./app:/var/www/app
+    ports:
+      - 34580:80
+    depends_on:
+      - app
+    networks:
+      app_network: ~
+    container_name: tic_tac_toe_nginx
+
+networks:
+  app_network:
+    name: "app_network"

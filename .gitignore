@@ -1,0 +1,6 @@
+.idea
+app/.phpunit.result.cache
+app/vendor
+dockers/db/db_volume
+app/configs/config.php
+app/.php-cs-fixer.cache
