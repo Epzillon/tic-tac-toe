@@ -3,22 +3,47 @@
 Tic-tac-toe is a paper-and-pencil game for two players who take turns marking the spaces in a three-by-three grid with X or O.
 The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.
 
-## Task
+## Preamble
 
 You have received this unfinished project that the company must present to customers tomorrow.
-You have minimum requirements, which sound like this:
+
+Minimum requirements:
 - The player can choose the grid size (N).
 - Man always starts first with "X" mark.
-- The computer should place the "O" randomly, but next to the "X".
+- The computer can place "O" randomly.
 - The player who succeeds in placing N of their marks in a horizontal, vertical, or diagonal row is the winner.
-- The game ends when there is no more free cell left.
-- At the end of the game, a leaderboard should be shown for the selected grid size:
-  - Top 10 players should be shown.
+- The player loses if there are no more free cells left.
+- The winning player must be saved to database.
+- At the end of the game, a leaderboard should be shown:
+  - Top 20 players should be shown.
   - Total amount of players should be shown.
-  - Shown players should be sorted by play time.
+  - Shown players should be sorted by grid size and play time.
+
+Something is already working, something is not. You need to:
+- Complete the remaining tasks
+- Create PR with all changes.
 
 NB! A frontend developer wasn't hired yet and customer was notified that solution could look not perfect from the frontend perspective.
 But all the efforts of the backend developer in this part will be taken into account.
+
+### Task #1
+
+Build the Leaderboard regarding the requirements.
+Right now it only shows some test values.
+
+### Task #2
+
+Players name should be saved and shown in the leaderboard in case player won.
+Right now we don't have such feature only a table in a database.
+
+### Task #3
+
+The computer's move logic should be rewritten to something less resource intensive.
+Recursive random is not working so good.
+
+### Task #4 (Optional)
+
+GameLogic file looks important. We want to cover it with tests.
 
 ## Installation
 
