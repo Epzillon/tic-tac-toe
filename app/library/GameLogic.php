@@ -21,26 +21,28 @@ class GameLogic
             }
         }
 
+        if (count($matrix) < 3) {
+            throw new \LogicException('Square matrix should be bigger than 2.');
+        }
+
         $this->matrix = $matrix;
     }
 
     /**
      * Good enough for MVP.
      * No one will notice.
-     *
-     * @param array $matrix
-     * @return array
      */
-    public function findBestMove(array $matrix): array
+    public function findBestMove(): array
     {
-        $row = rand(0, count($matrix) - 1);
-        $col = rand(0, count($matrix) - 1);
+        $gridSize = count($this->matrix) - 1;
+        $row = rand(0, $gridSize);
+        $col = rand(0, $gridSize);
 
-        if ($matrix[$row][$col] === '') {
+        if ($this->matrix[$row][$col] === '') {
             return [$row, $col];
         }
 
-        return $this->findBestMove($matrix);
+        return $this->findBestMove();
     }
 
     public function setComputersMove(int $row, int $col): void
@@ -68,8 +70,6 @@ class GameLogic
     /**
      * I just copypasted what ChatGPT gave me. Have no idea how it's working.
      * Need to write tests... Maybe.
-     *
-     * @return bool
      */
     public function doWeHaveWinner(): bool
     {

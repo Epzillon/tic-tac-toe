@@ -32,6 +32,17 @@ class GameLogicTest extends TestCase
         new GameLogic($matrix);
     }
 
+    public function testSmallMatrix(): void
+    {
+        $matrix = [
+            ['', ''],
+            ['', ''],
+        ];
+
+        $this->expectExceptionMessage('Square matrix should be bigger than 2.');
+        new GameLogic($matrix);
+    }
+
     public function testMatrixWithoutAnyMove(): void
     {
         $matrix = [
@@ -115,4 +126,34 @@ class GameLogicTest extends TestCase
         $this->assertTrue($gameLogic->isGameOver());
         $this->assertTrue($gameLogic->doWeHaveWinner());
     }
+
+    public function testFindOnlyPossibleMove(): void
+    {
+        $matrix = [
+            ['X', 'X', ''],
+            ['O', 'O', 'X'],
+            ['O', 'X', 'X'],
+        ];
+        $gameLogic = new GameLogic($matrix);
+
+        list($row, $col) = $gameLogic->findBestMove();
+        $this->assertSame(0, $row);
+        $this->assertSame(2, $col);
+    }
+
+    public function testFindBestMoveIfNoMovesAvailable(): void
+    {
+        $this->markTestSkipped('Allowed memory size bytes exhausted');
+        /** @noinspection PhpUnreachableStatementInspection */
+        $matrix = [
+            ['X', 'X', 'O'],
+            ['O', 'O', 'X'],
+            ['O', 'X', 'X'],
+        ];
+        $gameLogic = new GameLogic($matrix);
+
+        $this->expectExceptionMessage('No more available moves exists.');
+        $gameLogic->findBestMove();
+    }
+
 }
