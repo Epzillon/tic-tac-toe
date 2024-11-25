@@ -9,6 +9,13 @@ class GameLogic
     ) {
     }
 
+    /**
+     * Good enough for MVP.
+     * No one will notice.
+     *
+     * @param array $matrix
+     * @return array
+     */
     public function findBestMove(array $matrix): array
     {
         $row = rand(0, count($matrix) - 1);
@@ -43,6 +50,12 @@ class GameLogic
         return false;
     }
 
+    /**
+     * I just copypasted what ChatGPT gave me. Have no idea how it's working.
+     * Need to write tests... Maybe.
+     *
+     * @return bool
+     */
     public function isLastMoveWin(): bool
     {
         // Check rows

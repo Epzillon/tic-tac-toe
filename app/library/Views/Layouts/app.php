@@ -29,7 +29,7 @@ use App\Views\Layouts\AppLayout;
             <div class="navbar-header">
                 <?php /** @see \App\Controllers\IndexController::indexAction() */ ?>
                 <a class="navbar-brand" href="/">Play</a>
-                <?php /** @see \App\Controllers\IndexController::indexAction() */ ?>
+                <?php /** @see \App\Controllers\LeaderboardController::indexAction() */ ?>
                 <a class="navbar-brand" href="/leaderboard">Leaderboard</a>
             </div>
         </div>

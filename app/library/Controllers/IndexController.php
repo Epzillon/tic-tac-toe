@@ -29,8 +29,13 @@ class IndexController implements ControllerInterface
         return $gridSize;
     }
 
+    /**
+     * It is used in Ajax requests.
+     * @noinspection PhpUnused
+     */
     public function opponentsTurnAction(): AbstractView
     {
+        // Todo: Ask on StakeOverflow if it's good enough.
         $request_json = file_get_contents('php://input');
         $request = json_decode($request_json, true);
 
