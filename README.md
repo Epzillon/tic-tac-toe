@@ -23,8 +23,11 @@ Something is already working, something is not. You need to:
 - Complete the remaining tasks
 - Create PR with all changes.
 
-NB! A frontend developer wasn't hired yet and customer was notified that solution could look not perfect from the frontend perspective.
-But all the efforts of the backend developer in this part will be taken into account.
+NB! There are few things are important ot mention:
+1. You are now the lead developer and can make any changes you think are necessary.
+2. A frontend developer wasn't hired yet and customer was notified that solution could look not perfect from the frontend perspective. But all the efforts of the backend developer in this part will be taken into account.
+
+Good luck!
 
 ### Task #1
 
