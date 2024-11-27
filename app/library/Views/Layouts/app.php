@@ -17,8 +17,6 @@ use App\Views\Layouts\AppLayout;
 
     <link href="/www/bootstrap.min.css" rel="stylesheet">
     <link href="/www/style.css" rel="stylesheet">
-
-    <script src="/www/jquery-3.7.1.min.js"></script>
     <script src="/www/script.js"></script>
 </head>
 

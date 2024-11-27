@@ -31,7 +31,7 @@
                             $button_id = 'game_grid_' . $row . '_' . $col;
                             ?>
                         <td>
-                            <button id="<?= $button_id ?>" onclick="makeMove(<?= $button_id ?>)"></button>
+                            <button id="<?= $button_id ?>" onclick="makeMove('<?= $button_id ?>')"></button>
                         </td>
                     <?php } ?>
                 </tr>
