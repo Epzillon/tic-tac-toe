@@ -9,40 +9,36 @@ You have received this unfinished project that the company must present to custo
 
 Minimum requirements:
 - The player can choose the grid size (N).
-- Man always starts first with "X" mark.
-- The computer can place "O" randomly.
+- The player always starts first with the "X" mark.
+- The computer places "O" on the grid randomly.
 - The player who succeeds in placing N of their marks in a horizontal, vertical, or diagonal row is the winner.
 - The player loses if there are no more free cells left.
-- The winning player must be saved to database.
-- At the end of the game, a leaderboard should be shown:
-  - Top 20 players should be shown.
-  - Total amount of players should be shown.
-  - Shown players should be sorted by grid size and play time.
+- The winning player's details must be saved to the database.
+- At the end of the game, a leaderboard must be displayed:
+  - The top 20 players should be shown.
+  - The total number of players should be shown.
+  - The displayed players should be sorted by grid size and playtime.
 
-Something is already working, something is not. You need to:
-- Complete the remaining tasks
-- Create PR with all changes.
+Some functionality is already working, but some is not. You need to:
+- Complete the remaining tasks.
+- Create a PR with all the changes.
 
-NB! There are few things are important ot mention:
+NB! There are a few important things to mention:
 1. You are now the lead developer and can make any changes you think are necessary.
-2. A frontend developer wasn't hired yet and customer was notified that solution could look not perfect from the frontend perspective. But all the efforts of the backend developer in this part will be taken into account.
-
+2. A frontend developer hasn't been hired yet, and the customer has been notified that the solution might not look perfect from a frontend perspective. However, all backend development efforts contributing to the frontend will be taken into account.
 Good luck!
 
 ### Task #1
-
-Build the Leaderboard regarding the requirements.
-Right now it only shows some test values.
+Build the leaderboard according to the requirements.
+Currently, it only displays some test values.
 
 ### Task #2
-
-Players name should be saved and shown in the leaderboard in case player won.
-Right now we don't have such feature only a table in a database.
+The player's name should be saved and displayed on the leaderboard if they win.
+Currently, this feature only includes a table in the database, with no integration.
 
 ### Task #3
-
-The computer's move logic should be rewritten to something less resource intensive.
-Recursive random is not working so good.
+Rewrite the computer's move logic to make it less resource-intensive.
+The current recursive random implementation is inefficient.
 
 ## Installation
 
