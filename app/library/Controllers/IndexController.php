@@ -36,30 +36,30 @@ class IndexController implements ControllerInterface
     public function opponentsTurnAction(): AbstractView
     {
         // Todo: Ask on StakeOverflow if it's good enough.
-        $request_json = file_get_contents('php://input');
-        $request = json_decode($request_json, true);
+        $requestJson = file_get_contents('php://input');
+        $request = json_decode($requestJson, true);
 
         $matrix = $request['matrix'] ?? [];
 
         $gameLogic = new GameLogic($matrix);
 
-        $is_game_over = $gameLogic->isGameOver();
-        $is_player_win = $gameLogic->doWeHaveWinner();
-        $is_computer_win = false;
+        $isGameOver = $gameLogic->isGameOver();
+        $isPlayerWin = $gameLogic->doWeHaveWinner();
+        $isComputerWin = false;
         $row = 0;
         $col = 0;
-        if (!$is_player_win && $gameLogic->isFreeCellsLeft()) {
+        if (!$isPlayerWin && $gameLogic->isFreeCellsLeft()) {
             list($row, $col) = $gameLogic->findBestMove();
             $gameLogic->setComputersMove($row, $col);
-            $is_game_over = $gameLogic->isGameOver();
-            $is_computer_win = $gameLogic->doWeHaveWinner();
+            $isGameOver = $gameLogic->isGameOver();
+            $isComputerWin = $gameLogic->doWeHaveWinner();
         }
 
         $view = new JsonView();
         $view->data = [
-            'is_game_over' => $is_game_over,
-            'is_player_win' => $is_player_win,
-            'is_computer_win' => $is_computer_win,
+            'is_game_over' => $isGameOver,
+            'is_player_win' => $isPlayerWin,
+            'is_computer_win' => $isComputerWin,
             'row' => $row,
             'col' => $col,
         ];
