@@ -8,12 +8,8 @@ services:
       MYSQL_DATABASE: tic_tac_toe
       MYSQL_USER: tic_tac_toe
       MYSQL_PASSWORD: tic_tac_toe
-    ports:
-      - 13306:3306
     volumes:
       - ./dockers/db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
-    networks:
-      app_network: ~
 
   app:
     build: dockers/php/.
@@ -21,8 +17,6 @@ services:
       - ./app:/var/www/app
     depends_on:
       - db
-    networks:
-      app_network: ~
 
   nginx:
     image: 'nginx:1.17'
@@ -33,9 +27,3 @@ services:
       - 34580:80
     depends_on:
       - app
-    networks:
-      app_network: ~
-
-networks:
-  app_network:
-    name: "app_network"
