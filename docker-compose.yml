@@ -12,10 +12,8 @@ services:
       - 13306:3306
     volumes:
       - ./dockers/db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
-      - ./dockers/db/db_volume:/var/lib/mysql
     networks:
       app_network: ~
-    container_name: tic_tac_toe_test_db
 
   app:
     build: dockers/php/.
@@ -25,7 +23,6 @@ services:
       - db
     networks:
       app_network: ~
-    container_name: tic_tac_toe_app
 
   nginx:
     image: 'nginx:1.17'
@@ -38,7 +35,6 @@ services:
       - app
     networks:
       app_network: ~
-    container_name: tic_tac_toe_nginx
 
 networks:
   app_network:
