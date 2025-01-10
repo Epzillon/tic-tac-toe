@@ -44,7 +44,7 @@ The current recursive random implementation is inefficient.
 
 ```bash
     docker-compose up -d
-    docker exec -ti tic_tac_toe_app bash
+    docker-compose exec app bash
     composer install --dev
     cp ./configs/example.config.php ./configs/config.php
 ```
