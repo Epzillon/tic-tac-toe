@@ -145,6 +145,7 @@ class GameLogicTest extends TestCase
     {
         $this->markTestSkipped('Allowed memory size bytes exhausted');
         /** @noinspection PhpUnreachableStatementInspection */
+        /** @phpstan-ignore-next-line */
         $matrix = [
             ['X', 'X', 'O'],
             ['O', 'O', 'X'],

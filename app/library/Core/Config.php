@@ -6,13 +6,13 @@ use LogicException;
 
 class Config
 {
-    private static Config $instance;
+    private static ?Config $instance = null;
 
     private string $databaseHost = 'localhost';
     private int $databasePort = 3306;
     private string $databaseName = 'tic_tac_toe';
     private string $databaseUsername = 'tic_tac_toe';
-    private ?string $databasePassword = null;
+    private string $databasePassword = 'tic_tac_toe';
     private string $databaseCharset = 'utf8mb4';
 
     private function __construct(string $configPath)

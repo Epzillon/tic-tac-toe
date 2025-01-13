@@ -6,6 +6,11 @@ use Throwable;
 
 class ErrorView extends AbstractView
 {
+    /**
+     * @see error.phtml
+     * @noinspection PhpPropertyOnlyWrittenInspection
+     * @phpstan-ignore-next-line
+     */
     private Throwable $exception;
 
     public function __construct(Throwable $exception)

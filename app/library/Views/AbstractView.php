@@ -48,4 +48,5 @@ abstract class AbstractView
         $layout->render();
     }
 
+    abstract public function render(): void;
 }
