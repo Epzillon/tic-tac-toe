@@ -17,6 +17,6 @@ class ErrorView extends AbstractView
 
     public function render(): void
     {
-        include __DIR__ . '/error.php';
+        include __DIR__ . '/error.phtml';
     }
 }

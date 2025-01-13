@@ -12,6 +12,6 @@ class NotFoundView extends AbstractView
 
     public function render(): void
     {
-        include __DIR__ . '/notFound.php';
+        include __DIR__ . '/notFound.phtml';
     }
 }

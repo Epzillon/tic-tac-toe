@@ -13,6 +13,6 @@ class IndexView extends AbstractView
 
     public function render(): void
     {
-        include __DIR__ . '/index.php';
+        include __DIR__ . '/index.phtml';
     }
 }

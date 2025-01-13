@@ -14,6 +14,6 @@ class LeaderboardView extends AbstractView
 
     public function render(): void
     {
-        include __DIR__ . '/leaderboard.php';
+        include __DIR__ . '/leaderboard.phtml';
     }
 }

@@ -8,6 +8,6 @@ class AppLayout extends LayoutAbstract
     {
         http_response_code($this->view->getHttpResponseCode());
         header($this->view->getHttpResponseContentType());
-        include __DIR__ . '/app.php';
+        include __DIR__ . '/app.phtml';
     }
 }
