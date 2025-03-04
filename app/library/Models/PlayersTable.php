@@ -55,43 +55,49 @@ class PlayersTable extends AbstractTable
     }
 
     /**
-     * Return leaderboards and player count for all currently existing grid sizes where the key for each value is the corresponding grid size of the leaderboard.
+     * Return leaderboards and player count for all currently existing grid sizes.
      *
-     * @return array<int, array{total_players: int, leaderboard: array{array{name: string, play_time_seconds: int}}}> An array containing the player count and leaderboard for all grid sizes.
-     * 
-     * @example The data structure for leaderboards of size 5 and 10
-     * [
-     *      5: [
-     *          total_players: 2,
-     *          leaderboard: [
-     *              0: [name: "Player1", play_time_seconds: 10],
-     *              1: [name: "Player2", play_time_seconds: 15]
-     *          ]
-     *      ],
-     *      10: [
-     *          total_players: 1,
-     *          leaderboard: [
-     *              0: [name: "Player3", play_time_seconds: 5]
-     *          ]
-     *      ]
-     * ]
+     * @return array<array{grid_size: int, total_players: int, leaderboard: array{array{name: string, play_time_seconds: int}}}> An array containing the player count and leaderboard for all grid sizes.
      */
     public function getLeaderboards(): array {
         $gridSizes = $this->getDistinctGridSizes();
         $leaderboards = [];
 
-        // OPTIMIZE: For larger data sets this would be refactored to run parallel queries.
+        // OPTIMIZE: For larger data sets this should collect the calls of getLeaderboard() and be refactored to run parallel queries. This works fine for this scope though.
         foreach ($gridSizes as $gridSize) {
-            $playerCount = $this->getTotalPlayers($gridSize);
-            $leaderboard = $this->getLeaders($gridSize);
-
-            $leaderboards[$gridSize] = [
-                'total_players' => $playerCount,
-                'leaderboard' => $leaderboard
-            ];
+            $leaderboards[] = $this->getLeaderboard($gridSize);
         }
 
         return $leaderboards;
+    }
+
+    /**
+     * Summary of getLeaderboard
+     * @param int $gridSize
+     * 
+     * @return array<int, array{total_players: int, leaderboard: array{array{name: string, play_time_seconds: int}}}> An array containing the player count and leaderboard for all grid sizes.
+     * 
+     * @example The data structure for a leaderboard of size 5
+     * [
+     *      grid_size: 5,
+     *      total_players: 2,
+     *      leaderboard: [
+     *          0: [name: "Player1", play_time_seconds: 10],
+     *          1: [name: "Player2", play_time_seconds: 15]
+     *      ]
+     * ]
+     */
+    public function getLeaderboard(int $gridSize): array {
+        $playerCount = $this->getTotalPlayers($gridSize);
+        $leaderboardPlayers = $this->getLeaders($gridSize);
+
+        $leaderboard = [
+            'grid_size' => $gridSize,
+            'total_players' => $playerCount,
+            'leaderboard' => $leaderboardPlayers
+        ];
+
+        return $leaderboard;
     }
 
     /**

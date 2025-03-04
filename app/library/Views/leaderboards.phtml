@@ -8,8 +8,8 @@
 ?>
 
 <div class="row content-container col-xs-12">
-    <?php foreach ($this->leaderboards as $gridSize => $leaderboard) { ?>
-        <h2 class="leaderboard-heading">Grid Size: <?= $gridSize ?></h2>
+    <?php foreach ($this->leaderboards as $leaderboard) { ?>
+        <h2 class="leaderboard-heading">Grid Size: <?= $leaderboard['grid_size'] ?></h2>
         <p>Total players: <?= $leaderboard['total_players']; ?></p>
         <table id="leaderboard-table">
         <th class="lbh rank">Rank</th>
