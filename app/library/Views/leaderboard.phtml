@@ -8,18 +8,19 @@
 ?>
 
 <div class="row content-container col-xs-12">
-    <table id="leaderboard-table">
+    <?php foreach ($this->leaderboards as $gridSize => $leaderboard) { ?>
+        <h2 class="leaderboard-heading">Grid Size: <?= $gridSize ?></h2>
+        <table id="leaderboard-table">
         <th class="lbh rank">Rank</th>
         <th class="lbh name">Name</th>
-        <th class="lbh grid">Grid Size</th>
         <th class="lbh time">Time (Seconds)</th>
-        <?php foreach ($this->players as $idx => $player) { ?>
+        <?php foreach ($leaderboard as $idx => $player) { ?>
             <tr class="lbr">
                 <td class="lbd rank"><?= $idx + 1 ?></td>
                 <td class="lbd name"><?= $player['name'] ?></td>
-                <td class="lbd grid"><?= $player['grid_size'] ?></td>
                 <td class="lbd time"><?= $player['play_time_seconds'] ?></td>
             </tr>
         <?php } ?>
     </table>
+    <?php } ?>
 </div>

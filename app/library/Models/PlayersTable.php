@@ -22,8 +22,7 @@ class PlayersTable extends AbstractTable
             "
                 SELECT
                     name,
-                    play_time_seconds,
-                    grid_size
+                    play_time_seconds
                 FROM players
                 WHERE
                     grid_size = :grid_size
@@ -35,6 +34,43 @@ class PlayersTable extends AbstractTable
             ]
         );
     }
+
+    /**
+     * Retrieves the distinct grid sizes from played games.
+     * 
+     * @return array{int}
+     */
+    public function getDistinctGridSizes(): array {
+        $gridSizes = $this->executeSql(
+            "
+            SELECT
+            DISTINCT grid_size
+            FROM players
+            ORDER BY grid_size DESC
+            "
+        );
+
+        // Map to one-dimensional array
+        return array_map(fn($gridSizeItem) => $gridSizeItem['grid_size'], $gridSizes);
+    }
+
+    /**
+     * Return leaderboards for all currently existing grid sizes where the key for each leaderboard array is the corresponding grid size of the leaderboard.
+     *
+     * @return array<int, array{name: string, play_time_seconds: int}>
+     */
+    public function getLeaderboards(): array {
+        $gridSizes = $this->getDistinctGridSizes();
+        $leaderboards = [];
+
+        // OPTIMIZE: For larger data sets this would be refactored to run parallel queries.
+        foreach ($gridSizes as $gridSize) {
+            $leaderboards[$gridSize] = $this->getLeaders($gridSize);
+        }
+
+        return $leaderboards;
+    }
+
 
     public function addRow(string $name, int $gridSize, int $playTimeSeconds, string $date): void
     {
