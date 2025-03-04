@@ -14,7 +14,7 @@ class PlayersTable extends AbstractTable
      * 
      * @param int $gridSize The grid size to display leaderboard for
      * 
-     * @return array{array{name: string, play_time_seconds: int, grid_size: int}}
+     * @return array{array{name: string, play_time_seconds: int}} An array containing arrays with the name and play_time of each player on the leaderboard.
      */
     public function getLeaders(int $gridSize): array
     {
@@ -55,9 +55,26 @@ class PlayersTable extends AbstractTable
     }
 
     /**
-     * Return leaderboards for all currently existing grid sizes where the key for each leaderboard array is the corresponding grid size of the leaderboard.
+     * Return leaderboards and player count for all currently existing grid sizes where the key for each value is the corresponding grid size of the leaderboard.
      *
-     * @return array<int, array{name: string, play_time_seconds: int}>
+     * @return array<int, array{total_players: int, leaderboard: array{array{name: string, play_time_seconds: int}}}> An array containing the player count and leaderboard for all grid sizes.
+     * 
+     * @example The data structure for leaderboards of size 5 and 10
+     * [
+     *      5: [
+     *          total_players: 2,
+     *          leaderboard: [
+     *              0: [name: "Player1", play_time_seconds: 10],
+     *              1: [name: "Player2", play_time_seconds: 15]
+     *          ]
+     *      ],
+     *      10: [
+     *          total_players: 1,
+     *          leaderboard: [
+     *              0: [name: "Player3", play_time_seconds: 5]
+     *          ]
+     *      ]
+     * ]
      */
     public function getLeaderboards(): array {
         $gridSizes = $this->getDistinctGridSizes();
@@ -65,10 +82,41 @@ class PlayersTable extends AbstractTable
 
         // OPTIMIZE: For larger data sets this would be refactored to run parallel queries.
         foreach ($gridSizes as $gridSize) {
-            $leaderboards[$gridSize] = $this->getLeaders($gridSize);
+            $playerCount = $this->getTotalPlayers($gridSize);
+            $leaderboard = $this->getLeaders($gridSize);
+
+            $leaderboards[$gridSize] = [
+                'total_players' => $playerCount,
+                'leaderboard' => $leaderboard
+            ];
         }
 
         return $leaderboards;
+    }
+
+    /**
+     * Returns the total amount of players for a given grid size.
+     * 
+     * @param int $gridSize The grid size leaderboard to fetch total amount of players of.
+     * @return int          The amount of players for this grid size.
+     */
+    public function getTotalPlayers(int $gridSize): int {
+        // This assumes we are referring to every "play" recorded to the leaderboard.
+        // If players had accounts or we didnt want to count duplicate players names we would need to fetch unique rows here.
+        // This is just my thought process, but I think this is probably outside the scope of this test.
+        $playerCountResult = $this->executeSql(
+            "
+            SELECT COUNT(*)
+            FROM players
+            WHERE grid_size = :grid_size
+            ",
+            [
+                ':grid_size' => $gridSize
+            ]
+        );
+
+        // This could also be cleaner with refactoring of the executeSql() function, once again, this is probably outside of the scope of this test
+        return $playerCountResult[0]['COUNT(*)'];
     }
 
 
