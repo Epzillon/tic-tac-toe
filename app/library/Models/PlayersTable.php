@@ -9,6 +9,11 @@ class PlayersTable extends AbstractTable
         return 'players';
     }
 
+    /**
+     * Retrieve leaderboard by grid size.
+     * 
+     * @param int $gridSize The grid size to display leaderboard for
+     */
     public function getLeaders(int $gridSize): array
     {
         return $this->executeSql(
@@ -20,9 +25,11 @@ class PlayersTable extends AbstractTable
                 FROM players
                 WHERE
                     grid_size = :grid_size
+                ORDER BY play_time_seconds ASC
+                LIMIT 20
             ",
             [
-                ':grid_size' => $gridSize,
+                ':grid_size' => $gridSize
             ]
         );
     }
