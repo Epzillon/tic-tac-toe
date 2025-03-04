@@ -13,6 +13,8 @@ class PlayersTable extends AbstractTable
      * Retrieve leaderboard by grid size.
      * 
      * @param int $gridSize The grid size to display leaderboard for
+     * 
+     * @return array{array{name: string, play_time_seconds: int, grid_size: int}}
      */
     public function getLeaders(int $gridSize): array
     {
