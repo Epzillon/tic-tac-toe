@@ -2,18 +2,18 @@
 
 namespace App\Views;
 
-class LeaderboardView extends AbstractView
+class LeaderboardsView extends AbstractView
 {
     /** @var array[][] */
     public array $leaderboards;
 
     public function __construct()
     {
-        $this->setTitle("Leaderboard");
+        $this->setTitle("Leaderboards");
     }
 
     public function render(): void
     {
-        include __DIR__ . '/leaderboard.phtml';
+        include __DIR__ . '/leaderboards.phtml';
     }
 }

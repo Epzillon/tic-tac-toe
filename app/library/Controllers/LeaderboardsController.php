@@ -4,13 +4,13 @@ namespace App\Controllers;
 
 use App\Models\PlayersTable;
 use App\Views\AbstractView;
-use App\Views\LeaderboardView;
+use App\Views\LeaderboardsView;
 
-class LeaderboardController implements ControllerInterface
+class LeaderboardsController implements ControllerInterface
 {
     public function indexAction(): AbstractView
     {
-        $view = new LeaderboardView();
+        $view = new LeaderboardsView();
 
         $leaderboards = (new PlayersTable())->getLeaderboards();
         $view->leaderboards = $leaderboards;
