@@ -40,7 +40,7 @@ class PlayersTable extends AbstractTable
      * 
      * @return array{int}
      */
-    public function getDistinctGridSizes(): array {
+    private function getDistinctGridSizes(): array {
         $gridSizes = $this->executeSql(
             "
             SELECT
