@@ -7,7 +7,7 @@
 
 ?>
 
-<div class="row content-container col-xs-12">
+<div class="row content-container col-xs-12" id="leaderboards-container">
     <?php foreach ($this->leaderboards as $leaderboard) { ?>
         <h2 class="leaderboard-heading">Grid Size: <?= $leaderboard['grid_size'] ?></h2>
         <?php if (!$leaderboard['total_players']) { ?>
