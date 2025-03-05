@@ -40,10 +40,13 @@ async function buildResultContainer(result, gridSize) {
     let container = document.createElement("div");
     let heading = document.createElement("h1")
     let resultText = document.createElement("p");
+    let leaderboardHeading = document.createElement("h1");
     let leaderboard = await buildLeaderboardElement(gridSize);
 
-    heading.innerHTML = "Results!";
+    container.id = "result-container";
+    heading.innerHTML = "Results";
     resultText.innerHTML = getResultText(result);
+    leaderboardHeading.innerHTML = "Leaderboards:"
 
     container.appendChild(heading);
     container.appendChild(resultText);
