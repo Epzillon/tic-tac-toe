@@ -31,7 +31,7 @@
                             $button_id = 'game_grid_' . $row . '_' . $col;
                             ?>
                         <td>
-                            <button id="<?= $button_id ?>" onclick="makeMove('<?= $button_id ?>')"></button>
+                            <button id="<?= $button_id ?>" onclick="makeMove('<?= $button_id ?>', '<?= $this->gridSize ?>')"></button>
                         </td>
                     <?php } ?>
                 </tr>
@@ -39,3 +39,5 @@
         </table>
     </div>
 </div>
+
+<div id="results" style="display: none;"></div>
