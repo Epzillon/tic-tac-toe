@@ -15,8 +15,7 @@ async function displayResults(result, gridSize) {
 
     // Allow result submission on win
     if (result === "win") {
-        //let submitForm = buildSubmitForm();
-        //resultContainer.appendChild(submitForm);
+        displaySubmitForm();
     }
 
     // Add buttons for retry and leaderboards
@@ -26,6 +25,11 @@ async function displayResults(result, gridSize) {
     let resultDiv = document.getElementById("results");
     resultDiv.appendChild(resultContainer);
     resultDiv.style.display = "inline-block";
+}
+
+function displaySubmitForm() {
+    //let submitForm = buildSubmitForm();
+    //resultContainer.appendChild(submitForm);
 }
 
 /**
@@ -47,9 +51,11 @@ async function buildResultContainer(result, gridSize) {
     heading.innerHTML = "Results";
     resultText.innerHTML = getResultText(result);
     leaderboardHeading.innerHTML = "Leaderboards:"
+    leaderboardHeading.className = "leaderboard-heading";
 
     container.appendChild(heading);
     container.appendChild(resultText);
+    container.appendChild(leaderboardHeading);
     container.appendChild(leaderboard);
 
     return container;

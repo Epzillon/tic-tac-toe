@@ -9,23 +9,25 @@
 
 <div class="row content-container col-xs-12" id="leaderboards-container">
     <?php foreach ($this->leaderboards as $leaderboard) { ?>
-        <h2 class="leaderboard-heading">Grid Size: <?= $leaderboard['grid_size'] ?></h2>
-        <?php if (!$leaderboard['total_players']) { ?>
-            <p>Sorry, no leaderboards available for grid size <?= $leaderboard['grid_size'] ?>.</p>
-        <?php } else { ?>
+        <div class="leaderboard">
+            <h2 class="leaderboard-heading">Grid Size: <?= $leaderboard['grid_size'] ?></h2>
+            <?php if (!$leaderboard['total_players']) { ?>
+                <p class="no-available">Sorry, no leaderboards available for grid size <?= $leaderboard['grid_size'] ?>.</p>
+            <?php } else { ?>
             <p>Total players: <?= $leaderboard['total_players']; ?></p>
             <table id="leaderboard-table">
-            <th class="lbh rank">Rank</th>
-            <th class="lbh name">Name</th>
-            <th class="lbh time">Time (Seconds)</th>
-            <?php foreach ($leaderboard['leaderboard'] as $idx => $player) { ?>
-                <tr class="lbr">
-                    <td class="lbd rank"><?= $idx + 1 ?></td>
-                    <td class="lbd name"><?= $player['name'] ?></td>
-                    <td class="lbd time"><?= $player['play_time_seconds'] ?></td>
-                </tr>
+                <th class="lbh rank">Rank</th>
+                <th class="lbh name">Name</th>
+                <th class="lbh time">Time (Seconds)</th>
+                <?php foreach ($leaderboard['leaderboard'] as $idx => $player) { ?>
+                    <tr class="lbr">
+                        <td class="lbd rank"><?= $idx + 1 ?></td>
+                        <td class="lbd name"><?= $player['name'] ?></td>
+                        <td class="lbd time"><?= $player['play_time_seconds'] ?></td>
+                    </tr>
+                <?php } ?>
             <?php } ?>
-        <?php } ?>
-    </table>
+            </table>
+        </div>
     <?php } ?>
 </div>

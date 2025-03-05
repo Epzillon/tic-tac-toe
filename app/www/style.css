@@ -47,14 +47,48 @@ body {
     border-radius: 1rem;
 }
 
+#leaderboards-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90vw;
+    gap: 1rem;
+}
+
+#leaderboards-container .leaderboard {
+    padding: 1rem;
+    height: 30rem;
+}
+
 #results #leaderboards-container {
     width: calc(100% - 2rem);
     display: inline-block;
-    float: none
+    float: none;
+    margin: 0;
 }
 
-#results #leaderboard-table {
+#results #leaderboards-container .leaderboard-heading {
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+    font-size: 2.5rem;
+}
+
+#results #leaderboards-container .no-available {
+    margin-top: 1rem;
+}
+
+#leaderboard-table {
+    display: inline-block;
     margin: 0 auto;
+    max-height: 15rem;
+    overflow-y: auto;
+}
+
+#leaderboard-table th {
+    padding: 0 0.25rem;
+}
+
+#leaderboard-table td {
+    padding: 0 0.25rem;
 }
 
 .btn-container {
