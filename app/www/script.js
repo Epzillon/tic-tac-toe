@@ -1,6 +1,20 @@
+let timer;
+let timeElapsed = 0;
+let curGridSize;
+
 function makeMove(buttonId, gridSize) {
-  setButtonsValue(buttonId, 'X');
-  makeOpponentsTurn(gridSize);
+    if (!timer) {
+        timer = setInterval(() => {
+            timeElapsed++;
+        }, 1000);
+    }
+
+    if (!curGridSize) {
+        curGridSize = gridSize;
+    }
+
+    setButtonsValue(buttonId, 'X');
+    makeOpponentsTurn();
 }
 
 /**
@@ -217,7 +231,7 @@ function getLeaderboardHtml(gridSize) {
     });
 }
 
-function makeOpponentsTurn(gridSize) {
+function makeOpponentsTurn() {
   const matrix = [];
 
   let row = 1;
@@ -274,14 +288,16 @@ function makeOpponentsTurn(gridSize) {
       }
 
       if (is_game_over) {
+        clearInterval(timer);
+
         if (is_player_win) {
-            displayResults("win", gridSize, 15); // TODO: Add timer
+            displayResults("win", curGridSize, timeElapsed);
         }
         else if (is_computer_win) {
-            displayResults("loss", gridSize, 15); // TODO: Add timer
+            displayResults("loss", curGridSize, timeElapsed);
         }
         else {
-            displayResults("tie", gridSize, 15); // TODO: Add timer
+            displayResults("tie", curGridSize, timeElapsed);
         }
       }
     })
