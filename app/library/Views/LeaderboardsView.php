@@ -6,6 +6,7 @@ class LeaderboardsView extends AbstractView
 {
     /** @var array[][] */
     public array $leaderboards;
+    public int $gridSize;
 
     public function __construct()
     {
