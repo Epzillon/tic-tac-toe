@@ -31,18 +31,30 @@ class GameLogic
     /**
      * Good enough for MVP.
      * No one will notice.
+     * 
+     * NOTE: Improvement through deletion of recursion and has more consistent perfomance due to being limited to the size of the matrix.
      */
     public function findBestMove(): array
     {
-        $gridSize = count($this->matrix) - 1;
-        $row = rand(0, $gridSize);
-        $col = rand(0, $gridSize);
+        $emptySlots = [];
 
-        if ($this->matrix[$row][$col] === '') {
-            return [$row, $col];
+        // Loops the grid once and adds all empty slots defined as a string to a list
+        // Identifying strings are formatted as "r-{index}_c-{index}"
+        // r denoting the row and c the column for each empty slot
+        foreach ($this->matrix as $ridx => $row) {
+            foreach ($row as $cidx => $col) {
+                if ($this->matrix[$ridx][$cidx] === '') {
+                    $emptySlots[] = "r-" . $ridx . "_c-" . $cidx;
+                }
+            }
         }
 
-        return $this->findBestMove();
+        // Retrieves a random row and column by applying regex on a random string from the list
+        $chosenSpot = $emptySlots[rand(0, count($emptySlots) -1)];
+        // Improve performance further by implementing regex instead of exploding strings multiple times
+        preg_match_all('/[0-9]+/', $chosenSpot, $matches);
+
+        return [intval($matches[0][0]), intval($matches[0][1])];
     }
 
     public function setComputersMove(int $row, int $col): void
