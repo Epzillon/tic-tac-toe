@@ -21,7 +21,8 @@ function makeMove(buttonId, gridSize) {
  * Builds and appends a result div, displaying information about the results of the game.
  * 
  * @param {String} result   The result of the game as a string ("win"|"loss"|"tie")
- * @param {Number} gridSize The gird size of the game
+ * @param {Number} gridSize The grid size of the current game
+ * @param {Number} time     The elapsed time in seconds of the current game
  */
 async function displayResults(result, gridSize, time) {
     // Build result container
@@ -43,6 +44,14 @@ async function displayResults(result, gridSize, time) {
     resultDiv.style.display = "inline-block";
 }
 
+/**
+ * Builds the entire submit container, including headings, description and the full submission form.
+ * 
+ * @param {Number} gridSize     The grid size of the current game as an Integer
+ * @param {Number} time         Elapsed time in seconds of the current game as an Integer
+ * 
+ * @returns {HTMLElement}       The full submission element.
+ */
 function buildSubmitContainer(gridSize, time) {
     let submitContainer = document.createElement("div");
     let submitHeading = document.createElement("h1");
@@ -63,6 +72,16 @@ function buildSubmitContainer(gridSize, time) {
     return submitContainer;
 }
 
+/**
+ * Builds and returns a submission form as an HTMLElement.
+ * 
+ * NOTE: This is where my reasoning for the solution implemented for the leaderboard makes sense. This was just painful. See the note in the documentation for buildLeaderboardElement().
+ * 
+ * @param {Number} gridSize     he grid size of the current game as an Integer
+ * @param {Number} time         Elapsed time in seconds of the current game as an Integer
+ * 
+ * @returns {HTMLElement}       The prepared submission form.
+ */
 function buildSubmitForm(gridSize, time) {
     let submitForm = document.createElement("form");
     let inputLabel = document.createElement("label");
@@ -167,6 +186,13 @@ async function buildLeaderboardElement(gridSize) {
     }
 }
 
+/**
+ * Builds and returns a button container as an HTMLElement for the results container. Including a "Retry" and a "Show Leaderboards" button.
+ * 
+ * @param {Number} gridSize     The grid size of the current game
+ * 
+ * @returns {HTMLElement}       An HTMLElement of the button container, containing fully functioning buttons
+ */
 function buildButtonContainer(gridSize) {
     let btnContainer = document.createElement("div");
     let retryBtn = document.createElement("button");
