@@ -48,7 +48,7 @@ function buildSubmitContainer(gridSize, time) {
     let submitHeading = document.createElement("h1");
     let submitTime = document.createElement("p");
     let submitDescription = document.createElement("p");
-    let submitForm = buildSubmitForm(gridSize);
+    let submitForm = buildSubmitForm(gridSize, time);
     
     submitContainer.id = "submit-container";
     submitHeading.innerHTML = "Submit your score!"
@@ -85,7 +85,7 @@ function buildSubmitForm(gridSize, time) {
     playerTimeInput.id = "time";
     playerTimeInput.name = "time";
     playerTimeInput.type = "number";
-    playerGridSizeInput.hidden = true;
+    playerTimeInput.hidden = true;
     playerTimeInput.required = true;
     playerTimeInput.value = time;
 
@@ -99,6 +99,8 @@ function buildSubmitForm(gridSize, time) {
 
     submitForm.appendChild(inputLabel);
     submitForm.appendChild(playerNameInput);
+    submitForm.appendChild(playerGridSizeInput);
+    submitForm.appendChild(playerTimeInput);
     submitForm.appendChild(submitBtn);
 
     return submitForm;
