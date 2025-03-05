@@ -34,6 +34,29 @@ body {
     background-color: rgba(0,0,0,0.75);
 }
 
+#results #submit-container {
+    width: 20vw;
+    height: 30vh;
+    position: relative;
+    left: calc(80% - 20vw/2);
+    top: -20rem;
+    background-color: rgb(225,225,225);
+    box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.2);
+    padding: 1rem;
+    text-align: center;
+    border-radius: 1rem;
+}
+
+#results #submit-container input[type="submit"] {
+    border-radius: 0.5rem;
+    border: none;
+    background-color: rgb(50, 50 ,50);
+    color: rgb(200, 200, 200);
+    padding: 0.75rem;
+    margin: 1rem;
+    font-weight: 600;
+}
+
 #results #result-container {
     width: 30vw;
     height: 45vh;

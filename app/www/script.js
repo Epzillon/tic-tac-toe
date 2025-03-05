@@ -9,14 +9,9 @@ function makeMove(buttonId, gridSize) {
  * @param {String} result   The result of the game as a string ("win"|"loss"|"tie")
  * @param {Number} gridSize The gird size of the game
  */
-async function displayResults(result, gridSize) {
+async function displayResults(result, gridSize, time) {
     // Build result container
     let resultContainer = await buildResultContainer(result, gridSize);
-
-    // Allow result submission on win
-    if (result === "win") {
-        displaySubmitForm();
-    }
 
     // Add buttons for retry and leaderboards
     let buttonsContainer = buildButtonContainer(gridSize);
@@ -24,12 +19,75 @@ async function displayResults(result, gridSize) {
 
     let resultDiv = document.getElementById("results");
     resultDiv.appendChild(resultContainer);
+
+    // Allow result submission on win
+    if (result === "win") {
+        let submitContainer = buildSubmitContainer(gridSize, time);
+        resultDiv.appendChild(submitContainer);
+    }
+
     resultDiv.style.display = "inline-block";
 }
 
-function displaySubmitForm() {
-    //let submitForm = buildSubmitForm();
-    //resultContainer.appendChild(submitForm);
+function buildSubmitContainer(gridSize, time) {
+    let submitContainer = document.createElement("div");
+    let submitHeading = document.createElement("h1");
+    let submitTime = document.createElement("p");
+    let submitDescription = document.createElement("p");
+    let submitForm = buildSubmitForm(gridSize);
+    
+    submitContainer.id = "submit-container";
+    submitHeading.innerHTML = "Submit your score!"
+    submitTime.innerHTML = "Your time was " + time + " seconds!";
+    submitDescription.innerHTML = "Fill out the form and press \"Submit\" to submit your score!"
+
+    submitContainer.appendChild(submitHeading)
+    submitContainer.appendChild(submitTime);
+    submitContainer.appendChild(submitDescription);
+    submitContainer.appendChild(submitForm);
+
+    return submitContainer;
+}
+
+function buildSubmitForm(gridSize, time) {
+    let submitForm = document.createElement("form");
+    let inputLabel = document.createElement("label");
+    let playerGridSizeInput = document.createElement("input");
+    let playerTimeInput = document.createElement("input");
+    let playerNameInput = document.createElement("input");
+    let submitBtn = document.createElement("input");
+
+    submitForm.action = "/submit";
+    submitForm.method = "POST";
+    inputLabel.innerHTML = "Player Name:";
+
+    playerGridSizeInput.id = "grid_size";
+    playerGridSizeInput.name = "grid_size";
+    playerGridSizeInput.type = "number";
+    playerGridSizeInput.hidden = true;
+    playerGridSizeInput.required = true;
+    playerGridSizeInput.value = gridSize;
+
+    playerTimeInput.id = "time";
+    playerTimeInput.name = "time";
+    playerTimeInput.type = "number";
+    playerGridSizeInput.hidden = true;
+    playerTimeInput.required = true;
+    playerTimeInput.value = time;
+
+    playerNameInput.id = "player_name";
+    playerNameInput.name = "player_name";
+    playerNameInput.type = "text";
+    playerNameInput.placeholder = "Your epic player name..."
+    playerNameInput.required = true;
+    submitBtn.type = "submit"
+    submitBtn.value = "Submit";
+
+    submitForm.appendChild(inputLabel);
+    submitForm.appendChild(playerNameInput);
+    submitForm.appendChild(submitBtn);
+
+    return submitForm;
 }
 
 /**
@@ -217,13 +275,13 @@ function makeOpponentsTurn(gridSize) {
 
       if (is_game_over) {
         if (is_player_win) {
-            displayResults("win", gridSize);
+            displayResults("win", gridSize, 15); // TODO: Add timer
         }
         else if (is_computer_win) {
-            displayResults("loss", gridSize)
+            displayResults("loss", gridSize, 15); // TODO: Add timer
         }
         else {
-            displayResults("tie", gridSize);
+            displayResults("tie", gridSize, 15); // TODO: Add timer
         }
       }
     })
