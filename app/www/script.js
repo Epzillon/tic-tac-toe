@@ -92,6 +92,8 @@ function buildButtonContainer(gridSize) {
     let retryBtn = document.createElement("button");
     let leaderboardBtn = document.createElement("button");
 
+    btnContainer.className = "btn-container"
+
     retryBtn.innerHTML = "Retry";
     retryBtn.onclick = () => {
         window.location.reload();
